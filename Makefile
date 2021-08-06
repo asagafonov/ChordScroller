@@ -8,7 +8,7 @@ build:
 	npm run build
 
 lint:
-	npm run eslint -- src
+	npx eslint .
 
 test:
 	NODE_ENV=test npm test
