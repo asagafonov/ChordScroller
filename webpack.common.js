@@ -1,5 +1,7 @@
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/app.js',
   module: {
     rules:
       [
@@ -17,6 +19,17 @@ module.exports = {
           test: /\.html$/,
           use: ['html-loader'],
         },
+        {
+          test: /\.pug$/,
+          loader: 'pug-loader',
+        },
       ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/assets', to: 'assets' },
+      ],
+    }),
+  ],
 };

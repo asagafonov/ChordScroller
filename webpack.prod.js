@@ -2,7 +2,6 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.common');
@@ -14,14 +13,10 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
     minimizer: [
-      new OptimizeCssAssetsPlugin(),
       new TerserPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './src/index.pug',
         minify: {
           removeAttributeQuotes: true,
           collapseWhitespace: true,
@@ -38,11 +33,11 @@ module.exports = merge(common, {
     rules:
       [
         {
-          test: /\.(sa|sc|c)ss$/,
+          test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
-            'sass-loader',
+            'postcss-loader',
           ],
         },
       ],

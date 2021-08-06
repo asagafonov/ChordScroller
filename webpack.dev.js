@@ -11,15 +11,15 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/index.pug',
     }),
   ],
   module: {
     rules:
       [
         {
-          test: /\.(sa|sc|c)ss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader', 'postcss-loader'],
         },
       ],
   },
