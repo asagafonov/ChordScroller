@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "ChordScroller",
+  "action": {
+    "default_title": "ChordScroller",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/chordscroller16x16.png",
+      "32": "assets/chordscroller32x32.png",
+      "64": "assets/chordscroller64x64.png",
+      "128": "assets/chordscroller128x128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html"
+  }
+}

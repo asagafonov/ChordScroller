@@ -1,0 +1,22 @@
+env:
+  browser: true
+  es2021: true
+  webextensions: true
+  jest: true
+
+extends:
+  - airbnb-base
+
+parserOptions:
+  ecmaVersion: 12
+  sourceType: module
+
+settings:
+  import/resolver:
+    node:
+      moduleDirectory:
+        - node_modules
+        - src
+
+rules:
+  no-unused-expressions: 0
