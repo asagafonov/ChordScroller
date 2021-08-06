@@ -1,7 +1,7 @@
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/index.js',
   module: {
     rules:
       [
@@ -29,6 +29,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets' },
+        { from: 'manifest.json', to: 'manifest.json' },
       ],
     }),
   ],
