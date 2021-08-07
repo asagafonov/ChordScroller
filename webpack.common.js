@@ -26,6 +26,10 @@ module.exports = {
           test: /\.html$/,
           use: ['html-loader'],
         },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+        },
       ],
   },
   plugins: [
@@ -35,7 +39,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'src/assets', to: 'assets' },
+        // { from: 'src/assets', to: 'assets' },
         { from: 'manifest.json', to: 'manifest.json' },
       ],
     }),
