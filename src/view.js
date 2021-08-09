@@ -1,18 +1,18 @@
 import onChange from 'on-change';
 
-const sendStatus = (status) => {
+const sendStatus = (action, frequency) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: status });
+    chrome.tabs.sendMessage(tabs[0].id, { action, frequency });
   });
 };
 
-const playPause = (scrollingStatus) => {
+const playPause = (scrollingStatus, frequency) => {
   switch (scrollingStatus) {
     case true:
-      sendStatus('start');
+      sendStatus('start', frequency);
       break;
     case false:
-      sendStatus('stop');
+      sendStatus('stop', frequency);
       break;
     default:
       throw Error(`No such scrolling status as ${scrollingStatus}`);
@@ -21,7 +21,7 @@ const playPause = (scrollingStatus) => {
 
 const initView = (state) => {
   const mapping = {
-    scrolling: () => playPause(state.scrolling),
+    scrolling: () => playPause(state.scrolling, state.scrollSpeed.frequency),
   };
 
   const watchedState = onChange(state, (path) => {

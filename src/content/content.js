@@ -3,10 +3,10 @@ import startScroll from '../index';
 chrome.runtime.onMessage.addListener((request) => {
   switch (request.action) {
     case 'start':
-      startScroll(true);
+      startScroll(request.frequency);
       break;
     case 'stop':
-      startScroll(false);
+      startScroll(request.frequency);
       break;
     default:
       throw Error(`No such request as ${request.action}`);
