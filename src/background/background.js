@@ -1,5 +1,15 @@
+import initView from '../view';
+
+const state = {
+  scrolling: false,
+  scrollSpeed: {
+    offsetY: 10,
+    frequency: 1000,
+  },
+};
+
+const watched = initView(state);
+
 chrome.action.onClicked.addListener(() => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: 'initiate' });
-  });
+  watched.scrolling = !watched.scrolling;
 });
