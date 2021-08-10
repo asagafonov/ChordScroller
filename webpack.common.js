@@ -3,7 +3,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: path.join(__dirname, 'src', 'index'),
     background: path.join(__dirname, 'src', 'background', 'background'),
     content: path.join(__dirname, 'src', 'content', 'content'),
   },
