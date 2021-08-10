@@ -26,19 +26,16 @@ h1 {
 }
 
 .pause {
+  display: block;
   background: url('../assets/pause-button.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 3.13rem;
-  height: 3.13rem;
-  border: none;
-  margin-top: .63rem;
-  margin-bottom: 1.25rem;
 }
 
 .play {
   display: none;
   background: url('../assets/play-button.png');
+}
+
+.play-pause {
   background-size: contain;
   background-repeat: no-repeat;
   width: 3.13rem;

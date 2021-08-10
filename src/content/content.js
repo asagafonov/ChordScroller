@@ -1,15 +1,15 @@
-const scrollDown = () => window.scrollBy({
-  top: 10,
+const scrollDown = (offset) => window.scrollBy({
+  top: offset,
   behavior: 'smooth',
 });
 
 let id;
 
-chrome.runtime.onMessage.addListener(({ action, frequency }) => {
+chrome.runtime.onMessage.addListener(({ action, frequency, offset }) => {
   switch (action) {
     case 'start':
       clearInterval(id);
-      id = setInterval(scrollDown, frequency);
+      id = setInterval(() => scrollDown(offset), frequency);
       break;
     case 'stop':
       clearInterval(id);

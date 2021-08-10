@@ -2,10 +2,15 @@ import './popup.css';
 
 const playBtn = document.querySelector('.play');
 const pauseBtn = document.querySelector('.pause');
-const input = document.querySelector('#rangemeter');
+const speed = document.querySelector('#rangemeter');
+const offset = document.querySelector('#offsetmeter');
 
 [playBtn, pauseBtn].forEach((el) => el.addEventListener('click', () => {
-  chrome.runtime.sendMessage({ button: 'clicked', speed: input.value }, (response) => {
+  chrome.runtime.sendMessage({
+    button: 'clicked',
+    speed: speed.value,
+    offset: offset.value,
+  }, (response) => {
     switch (response) {
       case true:
         playBtn.style.display = 'block';
