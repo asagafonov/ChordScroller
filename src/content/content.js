@@ -8,6 +8,7 @@ let id;
 chrome.runtime.onMessage.addListener(({ action, frequency }) => {
   switch (action) {
     case 'start':
+      clearInterval(id);
       id = setInterval(scrollDown, frequency);
       break;
     case 'stop':
