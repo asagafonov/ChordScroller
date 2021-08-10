@@ -10,6 +10,8 @@ const state = {
 
 const watched = initView(state);
 
-chrome.action.onClicked.addListener(() => {
-  watched.scrolling = !watched.scrolling;
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.button === 'clicked') {
+    watched.scrolling = !watched.scrolling;
+  }
 });
