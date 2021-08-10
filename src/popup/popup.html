@@ -6,13 +6,17 @@
   </head>
   <body>
     <h1>ChordScroller</h1>
-    <div class="btn-containter">
-      <button class="play-pause" type="button" name="button"></button>
+    <div class="btn-container">
+      <button class="pause" type="button" name="button"></button>
+      <button class="play" type="button" name="button"></button>
     </div>
     <div class="input-container">
-      <label for="rangemeter">Speed</label>
+      <label for="rangemeter" alt="speed-control"></label>
       <input id="rangemeter" type="range" name="" value="4" min="1" max="6" step="1">
-      <p class="frq-output"></p>
+      <div class="rangemeter-description">
+        <p class="slow">slower</p>
+        <p class="fast">faster</p>
+      </div>
     </div>
   </body>
 </html>

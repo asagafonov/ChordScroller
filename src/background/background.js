@@ -19,9 +19,10 @@ const state = {
 
 const watched = initView(state);
 
-chrome.runtime.onMessage.addListener(({ button, speed }) => {
+chrome.runtime.onMessage.addListener(({ button, speed }, sender, sendResponse) => {
   if (button === 'clicked') {
     watched.scrollSpeed.frequency = speedValues[Number(speed)];
     watched.scrolling = !watched.scrolling;
+    sendResponse(watched.scrolling);
   }
 });
