@@ -50,6 +50,10 @@ h1 {
   color: rgb(129, 212, 84);
 }
 
+#offsetmeter {
+  margin-top: -.31rem;
+}
+
 .rangemeter-description {
   display: flex;
   justify-content: space-between;
