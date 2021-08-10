@@ -1,5 +1,14 @@
 import initView from '../view';
 
+const speedValues = {
+  1: 2500,
+  2: 2000,
+  3: 1500,
+  4: 1000,
+  5: 750,
+  6: 500,
+};
+
 const state = {
   scrolling: false,
   scrollSpeed: {
@@ -10,8 +19,9 @@ const state = {
 
 const watched = initView(state);
 
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.button === 'clicked') {
+chrome.runtime.onMessage.addListener(({ button, speed }) => {
+  if (button === 'clicked') {
+    watched.scrollSpeed.frequency = speedValues[Number(speed)];
     watched.scrolling = !watched.scrolling;
   }
 });
