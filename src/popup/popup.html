@@ -6,11 +6,24 @@
   </head>
   <body>
     <h1>ChordScroller</h1>
-    <div class="">
-      <button type="button" name="button"></button>
+    <div class="btn-container">
+      <button class="play-pause pause" type="button" name="button"></button>
+      <button class="play-pause play" type="button" name="button"></button>
     </div>
-    <div class="">
-      <input type="range" name="" value="1">
+    <div class="input-container">
+      <label for="rangemeter" alt="speed-control"></label>
+      <input id="rangemeter" type="range" name="" value="4" min="1" max="6" step="1">
+      <div class="rangemeter-description">
+        <p class="slow">slower</p>
+        <p class="fast">faster</p>
+      </div>
+      <br>
+      <label for="offsetmeter" alt="offset-control"></label>
+      <input id="offsetmeter" type="range" name="" value="1" min="1" max="6" step="1">
+      <div class="rangemeter-description">
+        <p class="slow">shorter</p>
+        <p class="fast">longer</p>
+      </div>
     </div>
   </body>
 </html>

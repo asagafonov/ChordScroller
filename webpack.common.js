@@ -1,10 +1,12 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
     background: path.join(__dirname, 'src', 'background', 'background'),
     content: path.join(__dirname, 'src', 'content', 'content'),
+    popup: path.join(__dirname, 'src', 'popup', 'popup'),
   },
   module: {
     rules:
@@ -27,9 +29,17 @@ module.exports = {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
         },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
+          type: 'asset/resource',
+        },
       ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/popup/popup.html'),
+      filename: 'popup.html',
+    }),
     new CopyPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets' },
