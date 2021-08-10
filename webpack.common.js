@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -30,6 +31,10 @@ module.exports = {
       ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/popup/popup.html'),
+      filename: 'popup.html',
+    }),
     new CopyPlugin({
       patterns: [
         { from: 'src/assets', to: 'assets' },
