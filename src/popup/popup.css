@@ -47,11 +47,12 @@ h1 {
 
 #rangemeter {
   margin-top: .31rem;
-  color: rgb(129, 212, 84);
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 #offsetmeter {
   margin-top: -.31rem;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .rangemeter-description {

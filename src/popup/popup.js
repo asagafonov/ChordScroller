@@ -20,11 +20,22 @@ const chooseBtnType = (response) => {
   }
 };
 
+const colorValues = {
+  1: 0,
+  2: 20,
+  3: 40,
+  4: 60,
+  5: 80,
+  6: 120,
+};
+
 window.onload = () => {
   chrome.runtime.sendMessage({ button: 'check' }, (response) => {
     chooseBtnType(response);
     speed.value = response.frequency;
+    speed.style.filter = `hue-rotate(-${colorValues[speed.value]}deg)`;
     offset.value = response.offsetY;
+    offset.style.filter = `hue-rotate(-${colorValues[offset.value]}deg)`;
   });
 };
 
@@ -34,4 +45,9 @@ window.onload = () => {
     speed: speed.value,
     offset: offset.value,
   }, (response) => chooseBtnType(response));
+}));
+
+[speed, offset].forEach((rangeElement) => rangeElement.addEventListener('input', () => {
+  const { value } = rangeElement;
+  rangeElement.style.filter = `hue-rotate(-${colorValues[value]}deg)`; // eslint-disable-line
 }));
