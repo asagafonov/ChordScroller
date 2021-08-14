@@ -12,7 +12,7 @@ const playPause = (scrollingStatus, frequency, offset) => {
       sendStatus('start', frequency, offset);
       break;
     case false:
-      sendStatus('stop', frequency, offset);
+      sendStatus('stop');
       break;
     default:
       throw Error(`No such scrolling status as ${scrollingStatus}`);
