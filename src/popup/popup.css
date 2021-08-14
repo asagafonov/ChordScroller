@@ -45,6 +45,11 @@ h1 {
   margin-bottom: 1.25rem;
 }
 
+.play-pause:hover {
+  transform: scale(1.15);
+  transition: 0.4s;
+}
+
 #frq-meter {
   margin-top: .31rem;
   transition: box-shadow 0.2s ease-in-out;
@@ -55,7 +60,7 @@ h1 {
   transition: box-shadow 0.2s ease-in-out;
 }
 
-.frq-meter-description {
+.range-meter-description {
   display: flex;
   justify-content: space-between;
 }
