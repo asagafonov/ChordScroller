@@ -2,8 +2,8 @@ import './popup.css';
 
 const playBtn = document.querySelector('.play');
 const pauseBtn = document.querySelector('.pause');
-const speed = document.querySelector('#rangemeter');
-const offset = document.querySelector('#offsetmeter');
+const speed = document.querySelector('#frq-meter');
+const offset = document.querySelector('#offset-meter');
 
 const chooseBtnType = (response) => {
   switch (response.btnStatus) {
