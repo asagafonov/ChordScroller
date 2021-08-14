@@ -20,11 +20,13 @@ const chooseBtnType = (response) => {
   }
 };
 
-chrome.runtime.sendMessage({ button: 'check' }, (response) => {
-  chooseBtnType(response);
-  speed.value = response.frequency;
-  offset.value = response.offsetY;
-});
+window.onload = () => {
+  chrome.runtime.sendMessage({ button: 'check' }, (response) => {
+    chooseBtnType(response);
+    speed.value = response.frequency;
+    offset.value = response.offsetY;
+  });
+};
 
 [playBtn, pauseBtn].forEach((btn) => btn.addEventListener('click', () => {
   chrome.runtime.sendMessage({
