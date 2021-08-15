@@ -19,9 +19,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: npm install
+        run: make install
+
+      - name: lint
+        run: make lint
+
       - name: build
         run: |
-          npm install
           rm -rf dist
           rm -f 'chordscroller.zip'
           npm run build
