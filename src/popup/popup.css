@@ -45,27 +45,33 @@ h1 {
   margin-bottom: 1.25rem;
 }
 
-#rangemeter {
+.play-pause:hover {
+  transform: scale(1.15);
+  transition: 0.4s;
+}
+
+#frq-meter {
   margin-top: .31rem;
-  color: rgb(129, 212, 84);
+  transition: box-shadow 0.2s ease-in-out;
 }
 
-#offsetmeter {
+#offset-meter {
   margin-top: -.31rem;
+  transition: box-shadow 0.2s ease-in-out;
 }
 
-.rangemeter-description {
+.range-meter-description {
   display: flex;
   justify-content: space-between;
 }
 
-.slow {
+.min {
   margin-top: -.13rem;
   margin-left: .13rem;
   padding-top: .13rem;
 }
 
-.fast {
+.max {
   margin-top: -.13rem;
   margin-right: .13rem;
   padding-top: .13rem;

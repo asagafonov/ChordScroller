@@ -26,13 +26,26 @@ const state = {
   },
 };
 
+const getKeyByValue = (obj, value) => Object.keys(obj).find((key) => obj[key] === value);
+
 const watched = initView(state);
 
 chrome.runtime.onMessage.addListener(({ button, speed, offset }, sender, sendResponse) => {
-  if (button === 'clicked') {
-    watched.scrollSpeed.frequency = speedValues[Number(speed)];
-    watched.scrollSpeed.offsetY = offsetValues[Number(offset)];
-    watched.scrolling = !watched.scrolling;
-    sendResponse(watched.scrolling);
+  switch (button) {
+    case 'clicked':
+      watched.scrollSpeed.frequency = speedValues[Number(speed)];
+      watched.scrollSpeed.offsetY = offsetValues[Number(offset)];
+      watched.scrolling = !watched.scrolling;
+      sendResponse({ btnStatus: watched.scrolling });
+      break;
+    case 'check':
+      sendResponse({
+        btnStatus: watched.scrolling,
+        frequency: getKeyByValue(speedValues, watched.scrollSpeed.frequency),
+        offsetY: getKeyByValue(offsetValues, watched.scrollSpeed.offsetY),
+      });
+      break;
+    default:
+      throw Error(`No such button demand as ${button}`);
   }
 });
