@@ -20,7 +20,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: release
-        run: make release_extension_package
+        run:
+          - apt-get update -qq && apt-get install -y -qq zip
+          - make release_extension_package
         env:
           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
