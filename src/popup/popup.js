@@ -4,6 +4,17 @@ const playBtn = document.querySelector('.play');
 const pauseBtn = document.querySelector('.pause');
 const speed = document.querySelector('#frq-meter');
 const offset = document.querySelector('#offset-meter');
+const speedValueBox = document.querySelector('.speed-value');
+const offsetValueBox = document.querySelector('.offset-value');
+
+const moveValues = {
+  1: 4,
+  2: 21,
+  3: 39,
+  4: 56,
+  5: 75,
+  6: 92,
+};
 
 const chooseBtnType = (response) => {
   switch (response.btnStatus) {
@@ -20,22 +31,15 @@ const chooseBtnType = (response) => {
   }
 };
 
-const colorValues = {
-  1: 0,
-  2: 20,
-  3: 40,
-  4: 60,
-  5: 80,
-  6: 120,
-};
-
 window.onload = () => {
   chrome.runtime.sendMessage({ button: 'check' }, (response) => {
     chooseBtnType(response);
     speed.value = response.frequency;
-    speed.style.filter = `hue-rotate(-${colorValues[speed.value]}deg)`;
+    speedValueBox.textContent = speed.value;
+    speedValueBox.style.left = `${moveValues[speed.value]}%`;
     offset.value = response.offsetY;
-    offset.style.filter = `hue-rotate(-${colorValues[offset.value]}deg)`;
+    offsetValueBox.textContent = offset.value;
+    offsetValueBox.style.left = `${moveValues[offset.value]}%`;
   });
 };
 
@@ -47,7 +51,12 @@ window.onload = () => {
   }, (response) => chooseBtnType(response));
 }));
 
-[speed, offset].forEach((rangeElement) => rangeElement.addEventListener('input', () => {
-  const { value } = rangeElement;
-  rangeElement.style.filter = `hue-rotate(-${colorValues[value]}deg)`; // eslint-disable-line
-}));
+speed.addEventListener('input', () => {
+  speedValueBox.textContent = speed.value;
+  speedValueBox.style.left = `${moveValues[speed.value]}%`;
+});
+
+offset.addEventListener('input', () => {
+  offsetValueBox.textContent = offset.value;
+  offsetValueBox.style.left = `${moveValues[offset.value]}%`;
+});

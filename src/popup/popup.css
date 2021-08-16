@@ -12,11 +12,12 @@
 
 body {
   font-family: 'Gilroy';
-}
-
-h1 {
-  font-size: 16px;
-  text-align: center;
+  margin: 0;
+  padding: 0;
+  min-width: 150px;
+  /* background-image: url('../assets/bgr.png');
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .btn-container {
@@ -27,22 +28,22 @@ h1 {
 
 .pause {
   display: block;
-  background: url('../assets/pause-button.png');
+  background: url('../assets/pick-off1.png');
 }
 
 .play {
   display: none;
-  background: url('../assets/play-button.png');
+  background: url('../assets/pick-on1.png');
 }
 
 .play-pause {
   background-size: contain;
   background-repeat: no-repeat;
-  width: 3.13rem;
-  height: 3.13rem;
+  width: 6rem;
+  height: 6rem;
   border: none;
-  margin-top: .63rem;
-  margin-bottom: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .play-pause:hover {
@@ -53,26 +54,140 @@ h1 {
 #frq-meter {
   margin-top: .31rem;
   transition: box-shadow 0.2s ease-in-out;
+  margin-bottom: .13rem;
 }
 
 #offset-meter {
-  margin-top: -.31rem;
   transition: box-shadow 0.2s ease-in-out;
+}
+
+.value-box {
+  position: relative;
+  font-weight: bold;
+  margin-top: -2px;
+}
+
+.speed-value {
+  left: 56%;
+}
+
+.offset-value {
+  left: 21%;
+}
+
+.footer {
+  margin-top: 10%;
+}
+
+label {
+  margin-left: 3%;
+}
+
+input[type=range] {
+  height: 24px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #000000;
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50px;
+  background: #000000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.5px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #000000;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #000000;
+  border-radius: 0px;
+  border: 0px solid #000000;
+}
+
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50px;
+  background: #000000;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+  background: #000000;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type=range]::-ms-fill-upper {
+  background: #000000;
+  border: 0px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 50px;
+  background: #000000;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #000000;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #000000;
 }
 
 .range-meter-description {
   display: flex;
-  justify-content: space-between;
-}
-
-.min {
-  margin-top: -.13rem;
-  margin-left: .13rem;
-  padding-top: .13rem;
-}
-
-.max {
-  margin-top: -.13rem;
-  margin-right: .13rem;
-  padding-top: .13rem;
+  justify-content: space-around;
+  margin-top: .63rem;
 }

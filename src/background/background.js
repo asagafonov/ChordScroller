@@ -21,7 +21,7 @@ const offsetValues = {
 const state = {
   scrolling: false,
   scrollSpeed: {
-    offsetY: 10,
+    offsetY: 20,
     frequency: 1000,
   },
 };
