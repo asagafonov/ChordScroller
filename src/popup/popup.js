@@ -6,14 +6,36 @@ const speed = document.querySelector('#frq-meter');
 const offset = document.querySelector('#offset-meter');
 const speedValueBox = document.querySelector('.speed-value');
 const offsetValueBox = document.querySelector('.offset-value');
+const speedDescriptionBox = document.querySelector('.speed-description');
+const offsetDescriptionBox = document.querySelector('.offset-description');
 
-const moveValues = {
-  1: 4,
-  2: 21,
-  3: 39,
-  4: 56,
-  5: 75,
-  6: 92,
+const stepValues = {
+  value: {
+    1: 4,
+    2: 21,
+    3: 39,
+    4: 56,
+    5: 75,
+    6: 92,
+  },
+  description: {
+    speed: {
+      1: 1,
+      2: 13,
+      3: 31,
+      4: 49,
+      5: 67,
+      6: 79,
+    },
+    offset: {
+      1: 1,
+      2: 14,
+      3: 32,
+      4: 50,
+      5: 68,
+      6: 81,
+    },
+  },
 };
 
 const chooseBtnType = (response) => {
@@ -36,10 +58,12 @@ window.addEventListener('DOMContentLoaded', () => {
     chooseBtnType(response);
     speed.value = response.frequency;
     speedValueBox.textContent = speed.value;
-    speedValueBox.style.left = `${moveValues[speed.value]}%`;
+    speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
+    speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
     offset.value = response.offsetY;
     offsetValueBox.textContent = offset.value;
-    offsetValueBox.style.left = `${moveValues[offset.value]}%`;
+    offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
+    offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
   });
 });
 
@@ -53,10 +77,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 speed.addEventListener('input', () => {
   speedValueBox.textContent = speed.value;
-  speedValueBox.style.left = `${moveValues[speed.value]}%`;
+  speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
+  speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
 });
 
 offset.addEventListener('input', () => {
   offsetValueBox.textContent = offset.value;
-  offsetValueBox.style.left = `${moveValues[offset.value]}%`;
+  offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
+  offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
 });
