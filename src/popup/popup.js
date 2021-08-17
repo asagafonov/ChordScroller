@@ -8,6 +8,7 @@ const speedValueBox = document.querySelector('.speed-value');
 const offsetValueBox = document.querySelector('.offset-value');
 const speedDescriptionBox = document.querySelector('.speed-description');
 const offsetDescriptionBox = document.querySelector('.offset-description');
+const authorLink = document.querySelector('.author-name');
 
 const stepValues = {
   value: {
@@ -95,4 +96,8 @@ offset.addEventListener('input', () => {
   offsetValueBox.textContent = offset.value;
   offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
   offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+});
+
+authorLink.addEventListener('click', () => {
+  chrome.tabs.create({ url: 'https://github.com/asagafonov' });
 });
