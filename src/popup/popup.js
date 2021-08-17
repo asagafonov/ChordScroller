@@ -31,7 +31,7 @@ const chooseBtnType = (response) => {
   }
 };
 
-window.onload = () => {
+window.addEventListener('DOMContentLoaded', () => {
   chrome.runtime.sendMessage({ button: 'check' }, (response) => {
     chooseBtnType(response);
     speed.value = response.frequency;
@@ -41,7 +41,7 @@ window.onload = () => {
     offsetValueBox.textContent = offset.value;
     offsetValueBox.style.left = `${moveValues[offset.value]}%`;
   });
-};
+});
 
 [playBtn, pauseBtn].forEach((btn) => btn.addEventListener('click', () => {
   chrome.runtime.sendMessage({
