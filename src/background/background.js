@@ -1,8 +1,8 @@
 import initView from '../view';
 
 const speedValues = {
-  1: 10000,
-  2: 5000,
+  1: 6000,
+  2: 4000,
   3: 2000,
   4: 1000,
   5: 750,
