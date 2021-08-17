@@ -76,12 +76,22 @@ window.addEventListener('DOMContentLoaded', () => {
 }));
 
 speed.addEventListener('input', () => {
+  chrome.runtime.sendMessage({
+    button: 'input',
+    speed: speed.value,
+    offset: offset.value,
+  });
   speedValueBox.textContent = speed.value;
   speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
   speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
 });
 
 offset.addEventListener('input', () => {
+  chrome.runtime.sendMessage({
+    button: 'input',
+    speed: speed.value,
+    offset: offset.value,
+  });
   offsetValueBox.textContent = offset.value;
   offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
   offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;

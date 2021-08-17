@@ -24,6 +24,7 @@ const state = {
     offsetY: 20,
     frequency: 1000,
   },
+  input: 0,
 };
 
 const getKeyByValue = (obj, value) => Object.keys(obj).find((key) => obj[key] === value);
@@ -44,6 +45,11 @@ chrome.runtime.onMessage.addListener(({ button, speed, offset }, sender, sendRes
         frequency: getKeyByValue(speedValues, watched.scrollSpeed.frequency),
         offsetY: getKeyByValue(offsetValues, watched.scrollSpeed.offsetY),
       });
+      break;
+    case 'input':
+      watched.scrollSpeed.frequency = speedValues[Number(speed)];
+      watched.scrollSpeed.offsetY = offsetValues[Number(offset)];
+      watched.input += 1;
       break;
     default:
       throw Error(`No such button demand as ${button}`);

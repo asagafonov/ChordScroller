@@ -26,6 +26,11 @@ const initView = (state) => {
       state.scrollSpeed.frequency,
       state.scrollSpeed.offsetY,
     ),
+    input: () => playPause(
+      state.scrolling,
+      state.scrollSpeed.frequency,
+      state.scrollSpeed.offsetY,
+    ),
   };
 
   const watchedState = onChange(state, (path) => {
