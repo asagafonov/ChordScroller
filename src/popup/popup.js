@@ -44,10 +44,12 @@ const chooseBtnType = (response) => {
     case true:
       playBtn.style.display = 'block';
       pauseBtn.style.display = 'none';
+      authorLink.style.color = 'rgb(129, 212, 84)';
       break;
     case false:
       playBtn.style.display = 'none';
       pauseBtn.style.display = 'block';
+      authorLink.style.color = 'rgb(237, 35, 13)';
       break;
     default:
       throw Error(`No such response type as ${response}`);
