@@ -25,12 +25,12 @@ body {
 
 .pause {
   display: block;
-  background: url('../assets/pick-off1.png');
+  background: url('../assets/pick-off.png');
 }
 
 .play {
   display: none;
-  background: url('../assets/pick-on2.png');
+  background: url('../assets/pick-on.png');
 }
 
 .play-pause {
