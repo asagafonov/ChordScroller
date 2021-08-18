@@ -63,10 +63,12 @@ window.addEventListener('DOMContentLoaded', () => {
     speedValueBox.textContent = speed.value;
     speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
     speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
+    speedDescriptionBox.textContent = 'speed';
     offset.value = response.offsetY;
     offsetValueBox.textContent = offset.value;
     offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
     offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+    offsetDescriptionBox.textContent = 'offset';
   });
 });
 
