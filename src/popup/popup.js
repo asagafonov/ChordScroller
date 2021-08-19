@@ -56,51 +56,70 @@ const chooseBtnType = (response) => {
   }
 };
 
+const handleResponse = (response) => {
+  const { action, frequency, offsetY } = response;
+
+  switch (action) {
+    case 'checked':
+      chooseBtnType(response);
+      speed.value = frequency;
+      speedValueBox.textContent = speed.value;
+      speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
+      speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
+      speedDescriptionBox.textContent = 'speed';
+      offset.value = offsetY;
+      offsetValueBox.textContent = offset.value;
+      offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
+      offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+      offsetDescriptionBox.textContent = 'offset';
+      break;
+    case 'clicked':
+      chooseBtnType(response);
+      break;
+    case 'input-changed':
+      speedValueBox.textContent = speed.value;
+      speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
+      speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
+      offsetValueBox.textContent = offset.value;
+      offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
+      offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+      break;
+    default:
+      throw Error(`No such action as ${response.action}`);
+  }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-  chrome.runtime.sendMessage({ button: 'check' }, (response) => {
-    chooseBtnType(response);
-    speed.value = response.frequency;
-    speedValueBox.textContent = speed.value;
-    speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
-    speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
-    speedDescriptionBox.textContent = 'speed';
-    offset.value = response.offsetY;
-    offsetValueBox.textContent = offset.value;
-    offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
-    offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
-    offsetDescriptionBox.textContent = 'offset';
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const port = chrome.tabs.connect(tabs[0].id);
+    port.postMessage({ action: 'check' });
+    port.onMessage.addListener(handleResponse);
   });
 });
 
 [playBtn, pauseBtn].forEach((btn) => btn.addEventListener('click', () => {
-  chrome.runtime.sendMessage({
-    button: 'clicked',
-    speed: speed.value,
-    offset: offset.value,
-  }, (response) => chooseBtnType(response));
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const port = chrome.tabs.connect(tabs[0].id);
+    port.postMessage({
+      action: 'click',
+      frequency: speed.value,
+      offset: offset.value,
+    });
+    port.onMessage.addListener(handleResponse);
+  });
 }));
 
-speed.addEventListener('input', () => {
-  chrome.runtime.sendMessage({
-    button: 'input',
-    speed: speed.value,
-    offset: offset.value,
+[speed, offset].forEach((el) => el.addEventListener('input', () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const port = chrome.tabs.connect(tabs[0].id);
+    port.postMessage({
+      action: 'input',
+      frequency: speed.value,
+      offset: offset.value,
+    });
+    port.onMessage.addListener(handleResponse);
   });
-  speedValueBox.textContent = speed.value;
-  speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
-  speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
-});
-
-offset.addEventListener('input', () => {
-  chrome.runtime.sendMessage({
-    button: 'input',
-    speed: speed.value,
-    offset: offset.value,
-  });
-  offsetValueBox.textContent = offset.value;
-  offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
-  offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
-});
+}));
 
 authorLink.addEventListener('click', () => {
   chrome.tabs.create({ url: 'https://github.com/asagafonov' });

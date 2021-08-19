@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    background: path.join(__dirname, 'src', 'background', 'background'),
     content: path.join(__dirname, 'src', 'content', 'content'),
     popup: path.join(__dirname, 'src', 'popup', 'popup'),
   },
