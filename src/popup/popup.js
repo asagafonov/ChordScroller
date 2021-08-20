@@ -9,6 +9,7 @@ const offsetValueBox = document.querySelector('.offset-value');
 const speedDescriptionBox = document.querySelector('.speed-description');
 const offsetDescriptionBox = document.querySelector('.offset-description');
 const authorLink = document.querySelector('.author-name');
+const inputContainer = document.querySelector('.input-container');
 
 const stepValues = {
   value: {
@@ -89,11 +90,31 @@ const handleResponse = (response) => {
   }
 };
 
+const handleDisconnect = () => {
+  const errorContainer = document.createElement('div');
+  const errorMessageOne = document.createElement('div');
+  const errorMessageTwo = document.createElement('div');
+  const br = document.createElement('br');
+
+  errorContainer.setAttribute('class', 'error');
+  errorMessageOne.textContent = 'ChordScroller couldn\'t establish connection.';
+  errorMessageTwo.textContent = 'Please reload this webpage!';
+  errorMessageTwo.setAttribute('class', 'error-accent');
+
+  inputContainer.innerHTML = '';
+
+  errorContainer.append(errorMessageOne);
+  errorContainer.append(br);
+  errorContainer.append(errorMessageTwo);
+  inputContainer.append(errorContainer);
+};
+
 window.addEventListener('DOMContentLoaded', () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const port = chrome.tabs.connect(tabs[0].id);
     port.postMessage({ action: 'check' });
     port.onMessage.addListener(handleResponse);
+    port.onDisconnect.addListener(handleDisconnect);
   });
 });
 
@@ -106,6 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
       offset: offset.value,
     });
     port.onMessage.addListener(handleResponse);
+    port.onDisconnect.addListener(handleDisconnect);
   });
 }));
 
@@ -118,6 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
       offset: offset.value,
     });
     port.onMessage.addListener(handleResponse);
+    port.onDisconnect.addListener(handleDisconnect);
   });
 }));
 
