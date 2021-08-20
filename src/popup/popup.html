@@ -5,25 +5,31 @@
     <title></title>
   </head>
   <body>
-    <h1>ChordScroller</h1>
     <div class="btn-container">
       <button class="play-pause pause" type="button" name="button"></button>
       <button class="play-pause play" type="button" name="button"></button>
     </div>
     <div class="input-container">
-      <label for="frq-meter" alt="frequency-control"></label>
-      <input id="frq-meter" type="range" name="" value="4" min="1" max="6" step="1">
-      <div class="range-meter-description">
-        <p class="min">slower</p>
-        <p class="max">faster</p>
+      <div class="input-box">
+        <!-- <label for="frq-meter" alt="frequency-control">speed</label> -->
+        <input id="frq-meter" type="range" name="" value="4" min="1" max="6" step="1">
+          <div class="value-box speed-value"></div>
+          <div class="description-box speed-description"></div>
+        </input>
       </div>
-      <br>
-      <label for="offset-meter" alt="offset-control"></label>
-      <input id="offset-meter" type="range" name="" value="1" min="1" max="6" step="1">
-      <div class="range-meter-description">
-        <p class="min">shorter</p>
-        <p class="max">longer</p>
+      <div class="input-box">
+        <!-- <label for="offset-meter" alt="offset-control">offset</label> -->
+        <input id="offset-meter" type="range" name="" value="2" min="1" max="6" step="1">
+          <div class="value-box offset-value"></div>
+          <div class="description-box offset-description"></div>
+        </input>
       </div>
     </div>
+    <div>
+      <div class="about">
+        <div class="about-author">made by <a class="author-name" href="#">asagafonov</a></div>
+      </div>
+    </div>
+    <div class="footer"></div>
   </body>
 </html>

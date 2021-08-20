@@ -19,18 +19,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: install dependencies
+        run: make install
+
+      - name: lint
+        run: make lint
+
       - name: build
         run: |
-          npm install
-          rm -rf dist
-          rm -f 'chordscroller.zip'
-          npm run build
-          zip -rj 'chordscroller.zip' dist/*
+          make clean
+          make build
+          make zip
 
       - name: upload & release
         uses: mnao305/chrome-extension-upload@1.1.1
         with:
-          file-path: chordscroller.zip
+          file-path: ${{ secrets.ZIP_PATH }}
           extension-id: ${{ secrets.EXTENSION_ID }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
