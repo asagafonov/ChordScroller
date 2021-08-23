@@ -1,44 +1,19 @@
 import './popup.css';
+import { stepValues } from '../utils/values';
+import elements from '../utils/elements';
 
-const playBtn = document.querySelector('.play');
-const pauseBtn = document.querySelector('.pause');
-const speed = document.querySelector('#frq-meter');
-const offset = document.querySelector('#offset-meter');
-const speedValueBox = document.querySelector('.speed-value');
-const offsetValueBox = document.querySelector('.offset-value');
-const speedDescriptionBox = document.querySelector('.speed-description');
-const offsetDescriptionBox = document.querySelector('.offset-description');
-const authorLink = document.querySelector('.author-name');
-const inputContainer = document.querySelector('.input-container');
-
-const stepValues = {
-  value: {
-    1: 4,
-    2: 21,
-    3: 39,
-    4: 56,
-    5: 75,
-    6: 92,
-  },
-  description: {
-    speed: {
-      1: 1,
-      2: 13,
-      3: 31,
-      4: 49,
-      5: 67,
-      6: 79,
-    },
-    offset: {
-      1: 1,
-      2: 14,
-      3: 32,
-      4: 50,
-      5: 68,
-      6: 81,
-    },
-  },
-};
+const {
+  playBtn,
+  pauseBtn,
+  frqMeter,
+  offsetMeter,
+  frqValueBox,
+  offsetValueBox,
+  frqDescriptionBox,
+  offsetDescriptionBox,
+  authorLink,
+  inputContainer,
+} = elements;
 
 const chooseBtnType = (response) => {
   switch (response.btnStatus) {
@@ -63,27 +38,27 @@ const handleResponse = (response) => {
   switch (action) {
     case 'checked':
       chooseBtnType(response);
-      speed.value = frequency;
-      speedValueBox.textContent = speed.value;
-      speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
-      speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
-      speedDescriptionBox.textContent = 'speed';
-      offset.value = offsetY;
-      offsetValueBox.textContent = offset.value;
-      offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
-      offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+      frqMeter.value = frequency;
+      frqValueBox.textContent = frqMeter.value;
+      frqValueBox.style.left = `${stepValues.value[frqMeter.value]}%`;
+      frqDescriptionBox.style.left = `${stepValues.description.speed[frqMeter.value]}%`;
+      frqDescriptionBox.textContent = 'speed';
+      offsetMeter.value = offsetY;
+      offsetValueBox.textContent = offsetMeter.value;
+      offsetValueBox.style.left = `${stepValues.value[offsetMeter.value]}%`;
+      offsetDescriptionBox.style.left = `${stepValues.description.offset[offsetMeter.value]}%`;
       offsetDescriptionBox.textContent = 'offset';
       break;
     case 'clicked':
       chooseBtnType(response);
       break;
     case 'input-changed':
-      speedValueBox.textContent = speed.value;
-      speedValueBox.style.left = `${stepValues.value[speed.value]}%`;
-      speedDescriptionBox.style.left = `${stepValues.description.speed[speed.value]}%`;
-      offsetValueBox.textContent = offset.value;
-      offsetValueBox.style.left = `${stepValues.value[offset.value]}%`;
-      offsetDescriptionBox.style.left = `${stepValues.description.offset[offset.value]}%`;
+      frqValueBox.textContent = frqMeter.value;
+      frqValueBox.style.left = `${stepValues.value[frqMeter.value]}%`;
+      frqDescriptionBox.style.left = `${stepValues.description.speed[frqMeter.value]}%`;
+      offsetValueBox.textContent = offsetMeter.value;
+      offsetValueBox.style.left = `${stepValues.value[offsetMeter.value]}%`;
+      offsetDescriptionBox.style.left = `${stepValues.description.offset[offsetMeter.value]}%`;
       break;
     default:
       throw Error(`No such action as ${response.action}`);
@@ -123,21 +98,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const port = chrome.tabs.connect(tabs[0].id);
     port.postMessage({
       action: 'click',
-      frequency: speed.value,
-      offset: offset.value,
+      frequency: frqMeter.value,
+      offset: offsetMeter.value,
     });
     port.onMessage.addListener(handleResponse);
     port.onDisconnect.addListener(handleDisconnect);
   });
 }));
 
-[speed, offset].forEach((el) => el.addEventListener('input', () => {
+[frqMeter, offsetMeter].forEach((el) => el.addEventListener('input', () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const port = chrome.tabs.connect(tabs[0].id);
     port.postMessage({
       action: 'input',
-      frequency: speed.value,
-      offset: offset.value,
+      frequency: frqMeter.value,
+      offset: offsetMeter.value,
     });
     port.onMessage.addListener(handleResponse);
     port.onDisconnect.addListener(handleDisconnect);

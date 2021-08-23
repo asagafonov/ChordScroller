@@ -1,20 +1,5 @@
-const speedValues = {
-  1: 6000,
-  2: 4000,
-  3: 2000,
-  4: 1000,
-  5: 750,
-  6: 500,
-};
-
-const offsetValues = {
-  1: 10,
-  2: 20,
-  3: 30,
-  4: 50,
-  5: 100,
-  6: 200,
-};
+import { getKeyByValue, scrollDown } from '../utils/functions';
+import { speedValues, offsetValues } from '../utils/values';
 
 const state = {
   scrolling: false,
@@ -22,22 +7,14 @@ const state = {
     offsetY: 20,
     frequency: 1000,
   },
-  input: 0,
 };
-
-const getKeyByValue = (obj, value) => Object.keys(obj).find((key) => obj[key] === value);
-
-const scrollDown = (offset) => window.scrollBy({
-  top: offset,
-  behavior: 'smooth',
-});
 
 let id;
 
-const playPause = (scrollingStatus) => {
-  const { offsetY, frequency } = state.scrollSpeed;
+const playPause = (appState) => {
+  const { offsetY, frequency } = appState.scrollSpeed;
 
-  switch (scrollingStatus) {
+  switch (appState.scrolling) {
     case true:
       clearInterval(id);
       id = setInterval(() => scrollDown(offsetY), frequency);
@@ -47,23 +24,13 @@ const playPause = (scrollingStatus) => {
       id = undefined;
       break;
     default:
-      throw Error(`No such scrolling status as ${scrollingStatus}`);
+      throw Error(`No such scrolling status as ${appState.scrolling}`);
   }
 };
 
 chrome.runtime.onConnect.addListener((port) => {
-  port.onMessage.addListener((request) => {
-    const { action, frequency, offset } = request;
-
+  port.onMessage.addListener(({ action, frequency, offset }) => {
     switch (action) {
-      case 'start':
-        clearInterval(id);
-        id = setInterval(() => scrollDown(offset), frequency);
-        break;
-      case 'stop':
-        clearInterval(id);
-        id = undefined;
-        break;
       case 'check':
         port.postMessage({
           action: 'checked',
@@ -77,7 +44,7 @@ chrome.runtime.onConnect.addListener((port) => {
         state.scrollSpeed.offsetY = offsetValues[offset];
         state.scrolling = !state.scrolling;
         port.postMessage({ action: 'clicked', btnStatus: state.scrolling });
-        playPause(state.scrolling);
+        playPause(state);
         break;
       case 'input':
         state.scrollSpeed.frequency = speedValues[frequency];
@@ -85,7 +52,7 @@ chrome.runtime.onConnect.addListener((port) => {
         port.postMessage({
           action: 'input-changed',
         });
-        playPause(state.scrolling);
+        playPause(state);
         break;
       default:
         throw Error(`No such request as ${action}`);
