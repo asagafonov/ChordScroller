@@ -135,12 +135,6 @@ body {
   color: rgb(237, 35, 13);
 }
 
-label {
-  position: absolute;
-  left: 2%;
-  font-size: .63rem;
-}
-
 input[type=range] {
   height: 1.5rem;
   -webkit-appearance: none;
