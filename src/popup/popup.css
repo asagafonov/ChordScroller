@@ -127,11 +127,12 @@ body {
   text-align: center;
   margin-bottom: 1rem;
   margin-top: -0.5rem;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
 }
 
 .error-accent {
+  margin-top: 0;
   color: rgb(237, 35, 13);
 }
 

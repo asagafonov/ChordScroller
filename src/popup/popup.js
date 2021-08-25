@@ -73,8 +73,8 @@ const handleDisconnect = () => {
 
   errorContainer.setAttribute('class', 'error');
   errorMessageOne.textContent = 'ChordScroller couldn\'t establish connection.';
-  errorMessageTwo.textContent = 'Please reload this webpage!';
-  errorMessageTwo.setAttribute('class', 'error-accent');
+  errorMessageTwo.textContent = 'Refreshing the page may fix this problem.';
+  errorMessageTwo.setAttribute('class', 'error error-accent');
 
   inputContainer.innerHTML = '';
 
