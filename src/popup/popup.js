@@ -1,4 +1,5 @@
 import './popup.css';
+import usePort from '../utils/port';
 import { handleResponse, handleDisconnect } from '../utils/handlers';
 import elements from '../utils/elements';
 
@@ -7,38 +8,35 @@ const {
 } = elements;
 
 window.addEventListener('DOMContentLoaded', () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const port = chrome.tabs.connect(tabs[0].id);
-    port.postMessage({ action: 'check' });
-    port.onMessage.addListener(handleResponse);
-    port.onDisconnect.addListener(handleDisconnect);
-  });
+  usePort(
+    { action: 'check' },
+    handleResponse,
+    handleDisconnect,
+  );
 });
 
 [playBtn, pauseBtn].forEach((btn) => btn.addEventListener('click', () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const port = chrome.tabs.connect(tabs[0].id);
-    port.postMessage({
+  usePort(
+    {
       action: 'click',
       frequency: frqMeter.value,
       offset: offsetMeter.value,
-    });
-    port.onMessage.addListener(handleResponse);
-    port.onDisconnect.addListener(handleDisconnect);
-  });
+    },
+    handleResponse,
+    handleDisconnect,
+  );
 }));
 
 [frqMeter, offsetMeter].forEach((el) => el.addEventListener('input', () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const port = chrome.tabs.connect(tabs[0].id);
-    port.postMessage({
+  usePort(
+    {
       action: 'input',
       frequency: frqMeter.value,
       offset: offsetMeter.value,
-    });
-    port.onMessage.addListener(handleResponse);
-    port.onDisconnect.addListener(handleDisconnect);
-  });
+    },
+    handleResponse,
+    handleDisconnect,
+  );
 }));
 
 authorLink.addEventListener('click', () => {
