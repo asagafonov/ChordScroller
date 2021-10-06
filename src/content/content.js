@@ -5,7 +5,7 @@ const state = {
   scrolling: false,
   scrollSpeed: {
     offsetY: 20,
-    frequency: 1000,
+    frequency: 2000,
   },
 };
 
