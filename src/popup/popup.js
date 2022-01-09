@@ -40,5 +40,5 @@ window.addEventListener('DOMContentLoaded', () => {
 }));
 
 authorLink.addEventListener('click', () => {
-  chrome.tabs.create({ url: 'https://github.com/asagafonov' });
+  chrome.tabs.create({ url: 'https://asagafonov.com' });
 });
