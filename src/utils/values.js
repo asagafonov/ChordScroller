@@ -45,4 +45,14 @@ const stepValues = {
   },
 };
 
-export { speedValues, offsetValues, stepValues };
+const colors = {
+  SUCCESS: 'rgb(129, 212, 84)',
+  DANGER: 'rgb(237, 35, 13)',
+};
+
+export {
+  speedValues,
+  offsetValues,
+  stepValues,
+  colors,
+};

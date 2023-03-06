@@ -1,5 +1,5 @@
 import elements from './elements';
-import { stepValues } from './values';
+import { stepValues, colors } from './values';
 
 const {
   playBtn,
@@ -19,12 +19,12 @@ const chooseBtnType = (response) => {
     case true:
       playBtn.style.display = 'block';
       pauseBtn.style.display = 'none';
-      authorLink.style.color = 'rgb(129, 212, 84)';
+      authorLink.style.color = colors.SUCCESS;
       break;
     case false:
       playBtn.style.display = 'none';
       pauseBtn.style.display = 'block';
-      authorLink.style.color = 'rgb(237, 35, 13)';
+      authorLink.style.color = colors.DANGER;
       break;
     default:
       throw Error(`No such response type as ${response}`);
