@@ -31,11 +31,11 @@ jobs:
           make build
           make zip
 
-      - name: upload & release
-        uses: mnao305/chrome-extension-upload@1.1.1
-        with:
-          file-path: ${{ secrets.ZIP_PATH }}
-          extension-id: ${{ secrets.EXTENSION_ID }}
-          client-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+      # - name: upload & release
+      #   uses: mnao305/chrome-extension-upload@1.1.1
+      #   with:
+      #     file-path: ${{ secrets.ZIP_PATH }}
+      #     extension-id: ${{ secrets.EXTENSION_ID }}
+      #     client-id: ${{ secrets.CLIENT_ID }}
+      #     client-secret: ${{ secrets.CLIENT_SECRET }}
+      #     refresh-token: ${{ secrets.REFRESH_TOKEN }}
