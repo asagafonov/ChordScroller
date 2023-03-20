@@ -1,4 +1,4 @@
-import { getKeyByValue, scrollDown } from '../utils/functions';
+import { getKeyByValue, scrollDown, getValuesFromStorage } from '../utils/functions';
 import { speedValues, offsetValues } from '../utils/values';
 
 const state = {
@@ -21,7 +21,7 @@ const playPause = (appState) => {
       break;
     case false:
       clearInterval(id);
-      id = undefined;
+      id = null;
       break;
     default:
       throw Error(`No such scrolling status as ${appState.scrolling}`);
@@ -31,7 +31,14 @@ const playPause = (appState) => {
 chrome.runtime.onConnect.addListener((port) => {
   port.onMessage.addListener(({ action, frequency, offset }) => {
     switch (action) {
-      case 'check':
+      case 'check': {
+        const savedValues = getValuesFromStorage();
+
+        if (savedValues) {
+          state.scrollSpeed.offsetY = savedValues.offset;
+          state.scrollSpeed.frequency = savedValues.frequency;
+        }
+
         port.postMessage({
           action: 'checked',
           btnStatus: state.scrolling,
@@ -39,6 +46,7 @@ chrome.runtime.onConnect.addListener((port) => {
           offsetY: getKeyByValue(offsetValues, state.scrollSpeed.offsetY),
         });
         break;
+      }
       case 'click':
         state.scrollSpeed.frequency = speedValues[frequency];
         state.scrollSpeed.offsetY = offsetValues[offset];
@@ -52,6 +60,10 @@ chrome.runtime.onConnect.addListener((port) => {
         port.postMessage({
           action: 'input-changed',
         });
+        localStorage.setItem('chordScrollerValues', JSON.stringify({
+          frequency: speedValues[frequency],
+          offset: offsetValues[offset],
+        }));
         playPause(state);
         break;
       default:

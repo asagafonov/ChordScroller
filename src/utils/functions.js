@@ -2,4 +2,10 @@ const getKeyByValue = (obj, value) => Object.keys(obj).find((key) => obj[key] ==
 
 const scrollDown = (offset) => window.scrollBy({ top: offset, behavior: 'smooth' });
 
-export { getKeyByValue, scrollDown };
+const getValuesFromStorage = (id = 'chordScrollerValues') => {
+  const data = localStorage.getItem(id);
+  const { frequency, offset } = JSON.parse(data);
+  return { frequency: Number(frequency), offset: Number(offset) };
+};
+
+export { getKeyByValue, scrollDown, getValuesFromStorage };
