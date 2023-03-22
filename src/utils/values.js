@@ -1,3 +1,6 @@
+const DEFAULT_SPEED = 2000;
+const DEFAULT_OFFSET = 20;
+
 const speedValues = {
   1: 8000,
   2: 6000,
@@ -55,4 +58,6 @@ export {
   offsetValues,
   stepValues,
   colors,
+  DEFAULT_SPEED,
+  DEFAULT_OFFSET,
 };

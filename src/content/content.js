@@ -1,11 +1,16 @@
 import { getKeyByValue, scrollDown, getValuesFromStorage } from '../utils/functions';
-import { speedValues, offsetValues } from '../utils/values';
+import {
+  speedValues,
+  offsetValues,
+  DEFAULT_SPEED,
+  DEFAULT_OFFSET,
+} from '../utils/values';
 
 const state = {
   scrolling: false,
   scrollSpeed: {
-    offsetY: 20,
-    frequency: 2000,
+    offsetY: DEFAULT_OFFSET,
+    frequency: DEFAULT_SPEED,
   },
 };
 
@@ -34,10 +39,8 @@ chrome.runtime.onConnect.addListener((port) => {
       case 'check': {
         const savedValues = getValuesFromStorage();
 
-        if (savedValues) {
-          state.scrollSpeed.offsetY = savedValues.offset;
-          state.scrollSpeed.frequency = savedValues.frequency;
-        }
+        state.scrollSpeed.offsetY = savedValues?.offset || DEFAULT_OFFSET;
+        state.scrollSpeed.frequency = savedValues?.frequency || DEFAULT_SPEED;
 
         port.postMessage({
           action: 'checked',
