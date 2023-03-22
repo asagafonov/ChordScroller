@@ -1,6 +1,6 @@
 {
   "name": "chord-scroller",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Page scroller for websites with guitar chords",
   "author": "asagafonov <a.s.asagafonov@yandex.ru>",
   "scripts": {
